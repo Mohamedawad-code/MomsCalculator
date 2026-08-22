@@ -1,0 +1,6 @@
+@MomsCalculator_HostAddress = http://localhost:5080
+
+GET {{MomsCalculator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
