@@ -4,9 +4,9 @@ namespace MomsCalculator.service
     public class CalculatorService
     {
         
-        public Result AddMoms(double price, Item item)
+        public VATResult AddMoms(double price, Item item)
         {
-            Result _result = new Result();
+            VATResult _result = new VATResult();
             price = item.Beforeprice;
 
           
