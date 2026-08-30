@@ -3,4 +3,251 @@
 
 <PageTitle>Mom's Calculator</PageTitle>
 
-<h1 style="text-align: center;">Mom's Calculator</h1>
+<nav class="topbar">
+    <div class="nav-inner">
+        <div class="nav-links">
+            <a href="#" class="nav-link">Advanceret regner</a>
+            <a href="/" class="nav-link active">Hjem</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-shell">
+    <section class="calculator-wrap">
+        <div class="calculator-panel">
+            <div class="calculator-card">
+                <div class="field-row amount-row">
+                    <label for="amount">Beløb</label>
+                    <div class="input-box">
+                        <input id="amount" type="number" step="0.01" placeholder="35,60" />
+                        <select aria-label="Currency">
+                            <option>DKK</option>
+                            <option>EUR</option>
+                            <option>USD</option>
+                            <option>SEK</option>
+                            <option>NOK</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <label for="vat">Vælg moms</label>
+                    <select id="vat">
+                        <option>Danmark - 25%</option>
+                        <option>Sverige - 25%</option>
+                        <option>Finland - 24%</option>
+                        <option>Tyskland - 19%</option>
+                        <option>Frankrig - 20%</option>
+                        <option>USA - 7%</option>
+                    </select>
+                </div>
+
+                <div class="field-row">
+                    <label for="mode">Før eller efter moms</label>
+                    <select id="mode">
+                        <option>Før moms</option>
+                        <option>Efter moms</option>
+                    </select>
+                </div>
+
+                <div class="result-box">
+                    <span class="result-label">Resultat</span>
+                    <strong>0,00 DKK</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    :root {
+        --bg: #f3f1f0;
+        --panel: #f8f5f4;
+        --border: #e2dedd;
+        --ink: #1d2430;
+        --muted: #66707d;
+        --soft: #f8f6f5;
+        --accent: #2e7ae8;
+        --accent-strong: #1e62c9;
+        --white: #ffffff;
+        --shadow: rgba(26, 33, 41, 0.06);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+        background: #6377F6;
+        color: var(--ink);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+    }
+
+    .topbar {
+        background: rgba(255, 255, 255, 0.85);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .nav-inner {
+        max-width: 1320px;
+        margin: 0 auto;
+        height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 28px;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+    }
+
+    .nav-link {
+        font-size: 1.05rem;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 500;
+        opacity: 0.9;
+    }
+
+    .nav-link:hover {
+        opacity: 1;
+    }
+
+    .nav-link.active {
+        font-weight: 700;
+    }
+
+    .page-shell {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 28px 28px 60px;
+    }
+
+    .calculator-wrap {
+        margin-top: 20px;
+        border-radius: 28px;
+        padding: 30px 24px;
+    }
+
+    .calculator-panel {
+        width: 100%;
+    }
+
+    .calculator-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 28px 26px 24px;
+        box-shadow: 0 10px 25px var(--shadow);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .field-row {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .field-row label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--ink);
+    }
+
+    .input-box {
+        display: flex;
+        align-items: center;
+        border: 1px solid #d8d2d0;
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--white);
+        min-height: 56px;
+    }
+
+    .input-box input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 0 16px;
+        font-size: 1.15rem;
+        min-height: 56px;
+        outline: none;
+        color: var(--ink);
+    }
+
+    .input-box select {
+        border: none;
+        border-left: 1px solid #e4dfde;
+        background: #f7f4f3;
+        min-height: 56px;
+        padding: 0 18px;
+        font-size: 1rem;
+        color: var(--ink);
+        outline: none;
+    }
+
+    select {
+        width: 100%;
+        min-height: 56px;
+        border: 1px solid #d8d2d0;
+        border-radius: 12px;
+        background: var(--white);
+        padding: 0 16px;
+        font-size: 1rem;
+        color: var(--ink);
+        outline: none;
+    }
+
+    .result-box {
+        margin-top: 26px;
+        background: #f5f6f7;
+        border: 1px solid #e2e8ee;
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+    }
+
+    .result-label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--muted);
+    }
+
+    .result-box strong {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--ink);
+    }
+
+    @@media (max-width: 900px) {
+        .calculator-wrap {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .hero-card {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+
+        .calculator-card {
+            padding: 22px 18px 18px;
+        }
+    }
+</style>
+
