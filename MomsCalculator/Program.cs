@@ -4,6 +4,7 @@ using MomsCalculator.service;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<ItemService>();
+builder.Services.AddSingleton<CalculatorService>();
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddRazorComponents()

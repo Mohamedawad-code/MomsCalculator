@@ -87,7 +87,8 @@ namespace MomsCalculator.service
                     return 0.25;
                 case CountryEnum.GB:
                     return 0.20;
-               
+                case CountryEnum.US:
+                    return 0.07;
 
                 default:
                     throw new Exception("Unknown country");
