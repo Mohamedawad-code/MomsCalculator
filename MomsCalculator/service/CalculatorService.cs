@@ -7,10 +7,21 @@ namespace MomsCalculator.service
         
        
         
-        public VATResult AddMoms(double price)
+        public VATResult CalculateMoms(double price, CountryEnum country, VatDirectionEnum direction)
         {
            VATResult _result = new VATResult();
-            price = _result.OriginalAmount;
+
+            _result.OriginalAmount = price;
+            
+            double countryVAT = GetVATrate(country);
+
+            if (direction == VatDirectionEnum.afterVAT)
+                _result.FinalAmount = price + (price * (countryVAT));
+
+            if (direction == VatDirectionEnum.BeforeVAT)
+                _result.FinalAmount = price - (price * (countryVAT));
+
+            
 
             return _result;
 
