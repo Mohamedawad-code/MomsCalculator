@@ -1,6 +1,6 @@
 ﻿namespace MomsCalculator.Models.Enums
 {
-    public enum VatDirection
+    public enum VatDirectionEnum
     {
         BeforeVAT,
         afterVAT
