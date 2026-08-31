@@ -46,9 +46,9 @@ namespace MomsCalculator.service
                 case CountryEnum.DK:
                     return 0.25;
                 case CountryEnum.EE:
-                    return 0.22;
-                case CountryEnum.FI:
                     return 0.24;
+                case CountryEnum.FI:
+                    return 0.255;
                 case CountryEnum.FR:
                     return 0.20;
                 case CountryEnum.DE:
@@ -78,7 +78,7 @@ namespace MomsCalculator.service
                 case CountryEnum.RO:
                     return 0.19;
                 case CountryEnum.SK:
-                    return 0.20;
+                    return 0.23;
                 case CountryEnum.SI:
                     return 0.22;
                 case CountryEnum.ES:
