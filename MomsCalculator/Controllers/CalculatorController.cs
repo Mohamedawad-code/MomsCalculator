@@ -16,7 +16,7 @@ namespace MomsCalculator.Controllers
             _calculator = calculatorService;
         }
 
-        [HttpPost]
+        [HttpPost("Moms")]
         public IActionResult CalculateMoms([FromBody] CalculateVatRequestDTO request)
         {
             VATResult result = _calculator.CalculateMoms(request.Amount, request.Country, request.Direction);
@@ -25,7 +25,7 @@ namespace MomsCalculator.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("UsedMoms")]
         public IActionResult CalculateUsedMoms([FromBody]UsedResultDTO request)
         {
             UsedVATResult result = _calculator.CalculateUsedVAT(request.OriginalAmount, request.SellingAmount);

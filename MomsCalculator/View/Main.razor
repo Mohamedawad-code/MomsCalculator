@@ -141,7 +141,7 @@
                 Direction = SelectedDirection
             };
 
-            var response = await client.PostAsJsonAsync("api/Calculator", request);
+            var response = await client.PostAsJsonAsync("api/Calculator/Moms", request);
             if (!response.IsSuccessStatusCode)
             {
                 ResultText = "Fejl ved beregning";
