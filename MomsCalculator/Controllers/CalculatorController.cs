@@ -25,6 +25,15 @@ namespace MomsCalculator.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult CalculateUsedMoms([FromBody]UsedResultDTO request)
+        {
+            UsedVATResult result = _calculator.CalculateUsedVAT(request.OriginalAmount, request.SellingAmount);
+            return Ok(result);
+        }
+
+
+
 
     }
 }

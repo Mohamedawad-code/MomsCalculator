@@ -94,6 +94,27 @@ namespace MomsCalculator.service
                     throw new Exception("Unknown country");
             }
 
+          
+
+
+        }
+
+        public UsedVATResult CalculateUsedVAT(double originalAmount, double sellingAmount)
+        {
+            UsedVATResult _result = new UsedVATResult();
+
+            _result.OriginalAmount = originalAmount;
+            _result.SellingAmount = sellingAmount;
+
+
+
+            double diffrence = sellingAmount - originalAmount;
+            _result.Result = diffrence * 0.25;
+
+            return _result;
+
+
+
         }
     }
 } 

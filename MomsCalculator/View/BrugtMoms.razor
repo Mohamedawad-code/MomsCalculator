@@ -1,0 +1,197 @@
+@page "/brugt-moms"
+
+<PageTitle>Brugt moms</PageTitle>
+
+<nav class="topbar">
+    <div class="nav-inner">
+        <div class="brand">Moms Udregner</div>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Hjem</a>
+            <a href="#" class="nav-link">Advanceret regner</a>
+            <a href="/brugt-moms" class="nav-link active">Brugt moms</a>
+        </div>
+    </div>
+</nav>
+
+<main class="used-vat-shell">
+    <section class="used-vat-card">
+        <div class="field-row">
+            <label for="used-item-amount">Beløb på brugt vare</label>
+            <input id="used-item-amount" type="number" step="0.01" min="0" @bind="UsedItemAmount" @bind:after="CalculateVat" />
+        </div>
+
+        <div class="field-row">
+            <label for="sale-price">Pris til salg</label>
+            <input id="sale-price" type="number" step="0.01" min="0" @bind="SalePrice" @bind:after="CalculateVat" />
+        </div>
+
+        <div class="total-row">
+            <span>Total moms</span>
+            <strong>@TotalVat.ToString("0.00") DKK</strong>
+        </div>
+    </section>
+</main>
+
+@code {
+    private decimal UsedItemAmount { get; set; }
+    private decimal SalePrice { get; set; }
+    private decimal TotalVat { get; set; }
+
+    private void CalculateVat()
+    {
+        var margin = Math.Max(0, SalePrice - UsedItemAmount);
+        TotalVat = margin * 25 / 125;
+    }
+}
+
+<style>
+    :root {
+        --border: #e2dedd;
+        --ink: #1d2430;
+        --muted: #66707d;
+        --white: #ffffff;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+        background: #6377F6;
+        color: var(--ink);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    .topbar {
+        background: rgba(255, 255, 255, 0.85);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .nav-inner {
+        max-width: 1320px;
+        margin: 0 auto;
+        height: 76px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding: 0 28px;
+        gap: 20px;
+    }
+
+    .brand {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--ink);
+        letter-spacing: -0.04em;
+        white-space: nowrap;
+        justify-self: start;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 26px;
+        justify-self: center;
+    }
+
+    .nav-link {
+        font-size: 1.05rem;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 500;
+        opacity: 0.9;
+    }
+
+    .nav-link:hover {
+        opacity: 1;
+    }
+
+    .nav-link.active {
+        font-weight: 700;
+    }
+
+    .used-vat-shell {
+        min-height: calc(100vh - 76px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 28px;
+    }
+
+    .used-vat-card {
+        width: min(100%, 800px);
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 28px 26px 24px;
+        box-shadow: 0 10px 25px rgba(26, 33, 41, 0.06);
+    }
+
+    .field-row {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .field-row label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--ink);
+    }
+
+    .field-row input {
+        width: 100%;
+        min-height: 56px;
+        border: 1px solid #d8d2d0;
+        border-radius: 12px;
+        background: var(--white);
+        padding: 0 16px;
+        font-size: 1rem;
+        color: var(--ink);
+        outline: none;
+    }
+
+    .total-row {
+        margin-top: 26px;
+        background: #f5f6f7;
+        border: 1px solid #e2e8ee;
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+    }
+
+    .total-row span {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--muted);
+    }
+
+    .total-row strong {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--ink);
+    }
+
+    @@media (max-width: 600px) {
+        .used-vat-shell {
+            padding: 18px;
+        }
+
+        .used-vat-card {
+            padding: 22px 18px 18px;
+        }
+    }
+</style>
