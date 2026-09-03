@@ -35,6 +35,17 @@
             <strong>@TotalVat.ToString("0.00") DKK</strong>
         </div>
     </section>
+
+    <aside class="info-card">
+        <h3>Brugt Moms Udregner</h3>
+        <p>Denne brugtmomsberegner udregner momsen af din fortjeneste, 
+            når du sælger brugte varer. Ved brugtmoms betaler du nemlig 
+            ikke moms af selve salgsprisen, men kun af din avance. 
+            Hvis du for eksempel køber en vare til 4.000 kr.
+             og sælger den videre for 5.500 kr.
+             , skal du kun betale moms af forskellen på 1.500 kr.
+        </p>
+    </aside>
 </main>
 
 @code {
@@ -154,20 +165,47 @@
     }
 
     .used-vat-shell {
+        width: min(100%, 1120px);
+        margin: 0 auto;
         min-height: calc(100vh - 82px);
-        display: flex;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 260px;
         align-items: center;
-        justify-content: center;
+        gap: 28px;
         padding: 48px 28px;
     }
 
     .used-vat-card {
-        width: min(100%, 720px);
+        width: 100%;
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: 20px;
         padding: 38px 40px 34px;
         box-shadow: 0 16px 40px rgba(32, 37, 54, 0.07);
+    }
+
+    .info-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 22px 20px;
+        box-shadow: 0 16px 40px rgba(32, 37, 54, 0.07);
+        min-height: 220px;
+    }
+
+    .info-card h3 {
+        margin: 0 0 12px;
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: var(--ink);
+        letter-spacing: -0.03em;
+    }
+
+    .info-card p {
+        margin: 0;
+        min-height: 130px;
+        color: var(--ink);
+        line-height: 1.6;
     }
 
     .field-row {
@@ -227,6 +265,8 @@
     @@media (max-width: 600px) {
         .used-vat-shell {
             padding: 24px 18px;
+            grid-template-columns: 1fr;
+            align-content: center;
         }
 
         .used-vat-card {
