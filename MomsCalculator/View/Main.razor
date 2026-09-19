@@ -10,7 +10,6 @@
 
 <nav class="topbar">
     <div class="nav-inner">
-        <div class="brand">Moms Udregner</div>
         <div class="nav-links">
             <a href="/" class="nav-link">Hjem</a>
             <a href="/calculator" class="nav-link active">land afregner</a>
@@ -203,43 +202,35 @@
     }
 
     .topbar {
+        width: fit-content;
+        max-width: calc(100% - 32px);
+        margin: 24px auto 0;
         background: rgba(255, 255, 255, 0.68);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.56);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 22px;
         position: sticky;
-        top: 0;
+        top: 24px;
         z-index: 10;
-        box-shadow: 0 2px 16px rgba(32, 37, 54, 0.08);
+        box-shadow: 0 8px 24px rgba(32, 37, 54, 0.1);
     }
 
     .nav-inner {
-        max-width: 1320px;
+        max-width: 100%;
         margin: 0 auto;
-        height: 82px;
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
+        height: 66px;
+        display: flex;
         align-items: center;
-        padding: 0 42px;
-        gap: 28px;
-    }
-
-    .brand {
-        font-size: 1.55rem;
-        font-weight: 800;
-        font-family: Cambria, Georgia, "Times New Roman", serif;
-        color: var(--accent);
-        letter-spacing: -0.02em;
-        white-space: nowrap;
-        justify-self: start;
+        padding: 0 24px;
     }
 
     .nav-links {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 34px;
-        justify-self: center;
+        gap: 30px;
+        white-space: nowrap;
     }
 
     .nav-link {
@@ -433,21 +424,18 @@
         }
 
         .nav-inner {
-            height: 72px;
-            padding: 0 20px;
+            padding: 0 18px;
         }
 
         .nav-links {
-            gap: 14px;
+            gap: 16px;
+            overflow-x: auto;
         }
 
         .nav-link {
             font-size: 0.86rem;
         }
 
-        .brand {
-            font-size: 1.25rem;
-        }
     }
 </style>
 
