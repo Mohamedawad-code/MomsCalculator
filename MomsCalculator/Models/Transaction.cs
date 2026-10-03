@@ -10,6 +10,7 @@ namespace MomsCalculator.Models
         public DateTime Date { get; set; } = DateTime.UtcNow.Date;
         public double VATamount { get; set; }
         public ExpenseOrIncomeEnum Type { get; set; }
+        public byte[]? ImageData { get; set; }
 
 
     }
