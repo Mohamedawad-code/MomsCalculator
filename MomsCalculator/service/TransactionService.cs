@@ -36,9 +36,12 @@ namespace MomsCalculator.service
 
         }
 
-        public Transaction EditTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData, Guid id)
+        public Transaction? EditTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData, Guid id)
         {
-            Transaction _transaction = _repo.GetById(id);
+            Transaction? _transaction = _repo.GetById(id);
+
+            if (_transaction == null)
+                throw new ArgumentException("id doesnt exist");
 
             _transaction.Name = name;
             _transaction.Amount = amount;
@@ -47,6 +50,12 @@ namespace MomsCalculator.service
             _transaction.ImageData = imageData;
 
             return _repo.Update(_transaction);
+        }
+
+        public void DeleteTransaction(Guid id)
+        {
+           
+            _repo.Delete(id);
         }
 
 
