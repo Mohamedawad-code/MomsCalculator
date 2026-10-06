@@ -1,10 +1,20 @@
 ﻿using MomsCalculator.Models;
 using MomsCalculator.Models.Enums;
+using MomsCalculator.Repo;
+using MomsCalculator.Interfaces;
 
 namespace MomsCalculator.service
 {
     public class TransactionService
+
     {
+        public readonly ITransactionRepo _repo;
+
+        public TransactionService(ITransactionRepo repo)
+        {
+            _repo = repo;
+        }
+
         public Transaction CreateTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData)
         {
             Transaction _transaction = new Transaction();
@@ -15,7 +25,7 @@ namespace MomsCalculator.service
             _transaction.VATamount = AddVAT(amount);
             _transaction.ImageData = imageData;
 
-            return _transaction;
+            return _repo.Add(_transaction);
 
         }
 
@@ -26,9 +36,17 @@ namespace MomsCalculator.service
 
         }
 
-        public Transaction EditTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData)
+        public Transaction EditTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData, Guid id)
         {
+            Transaction _transaction = _repo.GetById(id);
 
+            _transaction.Name = name;
+            _transaction.Amount = amount;
+            _transaction.Type = type;
+            _transaction.VATamount = AddVAT(amount);
+            _transaction.ImageData = imageData;
+
+            return _repo.Update(_transaction);
         }
 
 
