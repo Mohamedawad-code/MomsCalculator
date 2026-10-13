@@ -48,7 +48,8 @@ namespace MomsCalculator.Controllers
                 request.Name, 
                 request.Amount,
                 request.Type, 
-                request.ImageData );
+                request.ImageData,
+                request.SettingDate);
 
             return Ok(result);
         }
@@ -60,7 +61,8 @@ namespace MomsCalculator.Controllers
                 request.Amount,
                 request.Type,
                 request.ImageData,
-                id);
+                id,
+                request.SettingDate);
             if (result == null)
                 return NotFound();
 

@@ -7,10 +7,11 @@ namespace MomsCalculator.Models
         public Guid ID { get; set; } = Guid.NewGuid();
         public string? Name { get; set; }
         public double Amount { get; set; }
-        public DateTime Date { get; set; } = DateTime.UtcNow.Date;
+        public DateTime EnteringDate { get; set; } = DateTime.UtcNow.Date;
         public double VATamount { get; set; }
         public ExpenseOrIncomeEnum Type { get; set; }
         public byte[]? ImageData { get; set; }
+        public DateTime? SettingDate { get; set; } = DateTime.UtcNow.Date;
 
 
     }

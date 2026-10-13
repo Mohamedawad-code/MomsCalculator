@@ -15,7 +15,7 @@ namespace MomsCalculator.service
             _repo = repo;
         }
 
-        public Transaction CreateTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData)
+        public Transaction CreateTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData, DateTime settingDate)
         {
             Transaction _transaction = new Transaction();
 
@@ -24,6 +24,7 @@ namespace MomsCalculator.service
             _transaction.Type = type;
             _transaction.VATamount = AddVAT(amount);
             _transaction.ImageData = imageData;
+            _transaction.SettingDate = settingDate;
 
             return _repo.Add(_transaction);
 
@@ -36,7 +37,7 @@ namespace MomsCalculator.service
 
         }
 
-        public Transaction? EditTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData, Guid id)
+        public Transaction? EditTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData, Guid id, DateTime settingDate)
         {
             Transaction? _transaction = _repo.GetById(id);
 
@@ -48,6 +49,7 @@ namespace MomsCalculator.service
             _transaction.Type = type;
             _transaction.VATamount = AddVAT(amount);
             _transaction.ImageData = imageData;
+            _transaction.SettingDate = settingDate;
 
             return _repo.Update(_transaction);
         }
