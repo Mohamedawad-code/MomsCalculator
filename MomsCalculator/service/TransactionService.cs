@@ -41,7 +41,7 @@ namespace MomsCalculator.service
             Transaction? _transaction = _repo.GetById(id);
 
             if (_transaction == null)
-                throw new ArgumentException("id doesnt exist");
+                return null;
 
             _transaction.Name = name;
             _transaction.Amount = amount;
@@ -52,10 +52,22 @@ namespace MomsCalculator.service
             return _repo.Update(_transaction);
         }
 
-        public void DeleteTransaction(Guid id)
+
+        public bool DeleteTransaction(Guid id)
         {
            
-            _repo.Delete(id);
+            bool result = _repo.Delete(id);
+            return result;
+        }
+
+        public List<Transaction> GetAllTransactions()
+        {
+            return _repo.GetAll();
+        }
+
+        public Transaction? GetTransactionById(Guid id)
+        {
+            return _repo.GetById(id);
         }
 
 
