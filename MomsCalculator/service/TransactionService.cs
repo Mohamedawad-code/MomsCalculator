@@ -19,6 +19,9 @@ namespace MomsCalculator.service
         {
             Transaction _transaction = new Transaction();
 
+            if (!IsSettingDateValid(settingDate))
+                throw new ArgumentException("Setting Date cant be 100 years ago");
+
             _transaction.Name = name;
             _transaction.Amount = amount;
             _transaction.Type = type;
@@ -37,12 +40,20 @@ namespace MomsCalculator.service
 
         }
 
+        public bool IsSettingDateValid(DateTime settingDate)
+        {
+            DateTime maxPastDate = DateTime.Now.AddYears(-100);
+            return settingDate >= maxPastDate;
+        }
+
         public Transaction? EditTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData, Guid id, DateTime settingDate)
         {
             Transaction? _transaction = _repo.GetById(id);
 
             if (_transaction == null)
                 return null;
+            if (!IsSettingDateValid(settingDate))
+                throw new ArgumentException("Setting Date cant be 100 years ago");
 
             _transaction.Name = name;
             _transaction.Amount = amount;

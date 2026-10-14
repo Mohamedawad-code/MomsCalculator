@@ -44,29 +44,48 @@ namespace MomsCalculator.Controllers
         [HttpPost]
         public IActionResult CreateTransaction([FromBody]TransactionDTO request)
         {
-            Transaction result = _transactionService.CreateTransaction(
-                request.Name, 
-                request.Amount,
-                request.Type, 
-                request.ImageData,
-                request.SettingDate);
+            try
+            {
 
-            return Ok(result);
+                Transaction result = _transactionService.CreateTransaction(
+                    request.Name,
+                    request.Amount,
+                    request.Type,
+                    request.ImageData,
+                    request.SettingDate);
+
+                return Ok(result);
+            }
+
+            catch (ArgumentException exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateTransaction(Guid id, [FromBody]TransactionDTO request)
         {
-            Transaction? result = _transactionService.EditTransaction(request.Name,
-                request.Amount,
-                request.Type,
-                request.ImageData,
-                id,
-                request.SettingDate);
-            if (result == null)
-                return NotFound();
 
-            return Ok(result);
+            try
+            {
+                Transaction? result = _transactionService.EditTransaction(request.Name,
+                    request.Amount,
+                    request.Type,
+                    request.ImageData,
+                    id,
+                    request.SettingDate);
+
+                if (result == null)
+                    return NotFound();
+
+                return Ok(result);
+            }
+
+            catch (ArgumentException exception)
+            {
+                return BadRequest(exception.Message);
+            }
 
         }
 

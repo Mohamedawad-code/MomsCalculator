@@ -8,7 +8,7 @@ namespace MomsCalculator.DTO
         public double Amount { get; set; }
         public ExpenseOrIncomeEnum Type { get; set; }
         public byte[]? ImageData { get; set; }
-        public DateTime SettingDate { get; set; }
+        public DateTime SettingDate { get; set; } = DateTime.UtcNow.Date;
         
 
     }
