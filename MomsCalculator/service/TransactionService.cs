@@ -21,11 +21,13 @@ namespace MomsCalculator.service
 
             if (!IsSettingDateValid(settingDate))
                 throw new ArgumentException("Setting Date cant be 100 years ago");
+            if (!IsAmountValid(amount))
+                throw new ArgumentException("Amount must be greater than 0");
 
             _transaction.Name = name;
             _transaction.Amount = amount;
             _transaction.Type = type;
-            _transaction.VATamount = AddVAT(amount);
+            _transaction.VATamount = DecideVAT(amount, type);
             _transaction.ImageData = imageData;
             _transaction.SettingDate = settingDate;
 
@@ -33,10 +35,24 @@ namespace MomsCalculator.service
 
         }
 
-        public double AddVAT(double amount)
+        public double DecideVAT(double amount, ExpenseOrIncomeEnum type)
         {
-            double VATresult = amount * 0.25;
-            return VATresult;
+            double VATResult = 0;
+
+            if (type == ExpenseOrIncomeEnum.SaleInDk)
+                VATResult = amount * 0.25;
+
+            if (type == ExpenseOrIncomeEnum.PurchaseInDk)
+                VATResult = amount * 0.25;
+
+            if (type == ExpenseOrIncomeEnum.Export)
+                VATResult = 0;
+
+            if (type == ExpenseOrIncomeEnum.NoVAT)
+                VATResult = 0;
+
+            return VATResult;
+
 
         }
 
@@ -44,6 +60,11 @@ namespace MomsCalculator.service
         {
             DateTime maxPastDate = DateTime.Now.AddYears(-100);
             return settingDate >= maxPastDate;
+        }
+
+        public bool IsAmountValid(double amount)
+        {
+            return amount > 0;
         }
 
         public Transaction? EditTransaction(string name, double amount, ExpenseOrIncomeEnum type, byte[]? imageData, Guid id, DateTime settingDate)
@@ -54,11 +75,13 @@ namespace MomsCalculator.service
                 return null;
             if (!IsSettingDateValid(settingDate))
                 throw new ArgumentException("Setting Date cant be 100 years ago");
+            if (!IsAmountValid(amount))
+                throw new ArgumentException("Amount must be greater than 0");
 
             _transaction.Name = name;
             _transaction.Amount = amount;
             _transaction.Type = type;
-            _transaction.VATamount = AddVAT(amount);
+            _transaction.VATamount = DecideVAT(amount, type);
             _transaction.ImageData = imageData;
             _transaction.SettingDate = settingDate;
 

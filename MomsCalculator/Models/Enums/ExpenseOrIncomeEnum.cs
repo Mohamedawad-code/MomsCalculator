@@ -2,7 +2,9 @@
 {
     public enum ExpenseOrIncomeEnum
     {
-        Expense,
-        Income
+        SaleInDk,
+        PurchaseInDk,
+        Export,
+        NoVAT
     }
 }
