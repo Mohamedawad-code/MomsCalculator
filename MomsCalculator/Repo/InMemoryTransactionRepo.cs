@@ -52,5 +52,13 @@ namespace MomsCalculator.Repo
 
             return true;
         }
+
+
+        public List<Transaction> GetByDateRange(DateTime from, DateTime to) // get transaction list by date range
+        {
+            return _list
+                .Where(t => t.SettingDate >= from.Date && t.SettingDate < to.Date.AddDays(1))
+                .ToList();
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace MomsCalculator.Interfaces
         List<Transaction> GetAll();
         Transaction? Update(Transaction transaction);
         bool Delete(Guid id);
+        List<Transaction> GetByDateRange(DateTime from, DateTime to);
     }
 }
