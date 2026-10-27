@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ITransactionRepo, InMemoryTransactionRepo>();
 builder.Services.AddScoped<TransactionService>();
 builder.Services.AddSingleton<CalculatorService>();
+builder.Services.AddScoped<VATReportService>();
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddRazorComponents()
