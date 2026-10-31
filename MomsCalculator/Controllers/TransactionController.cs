@@ -3,6 +3,7 @@ using MomsCalculator.service;
 using MomsCalculator.DTO;
 using MomsCalculator.Models;
 using MomsCalculator.Interfaces;
+using MomsCalculator.Models.Enums;
 
 namespace MomsCalculator.Controllers
 {
@@ -21,11 +22,17 @@ namespace MomsCalculator.Controllers
 
 
         [HttpGet]
-        public IActionResult GetAllTransactions()
+        public IActionResult GetAllTransactions(DateTime? from, DateTime? to, ExpenseOrIncomeEnum? type, string? name)
         {
-            List<Transaction> result = _transactionService.GetAllTransactions();
-
-            return Ok(result);
+            try
+            {
+                List<Transaction> result = _transactionService.SearchTransactions(from, to, type, name);
+                return Ok(result);
+            }
+            catch (ArgumentException exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
         [HttpGet("{id}")]

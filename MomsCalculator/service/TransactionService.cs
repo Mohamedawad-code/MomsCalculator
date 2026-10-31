@@ -106,6 +106,36 @@ namespace MomsCalculator.service
             return _repo.GetById(id);
         }
 
+        public List<Transaction> SearchTransactions(DateTime? from, DateTime? to, ExpenseOrIncomeEnum? type, string? name)
+        {
+            if (from.HasValue != to.HasValue)
+                throw new ArgumentException("Send both from and to dates, or neither.");
+
+            List<Transaction> transactions;
+
+            if (from.HasValue && to.HasValue)
+            {
+                if (from.Value > to.Value)
+                    throw new ArgumentException("From date must be on or before the To date");
+
+                transactions = _repo.GetByDateRange(from.Value, to.Value);
+            }
+            else
+            {
+                transactions = _repo.GetAll();
+            }
+
+            if (type.HasValue)
+                transactions = transactions.Where(t => t.Type == type.Value).ToList();
+
+            if (!string.IsNullOrWhiteSpace(name))
+                transactions = transactions
+                    .Where(t => t.Name != null && t.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+            return transactions.OrderByDescending(t => t.SettingDate).ToList();
+        }
+
 
     }
 }

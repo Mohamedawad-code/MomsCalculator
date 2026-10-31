@@ -32,6 +32,9 @@ namespace MomsCalculator.Repo
             current.Name = transaction.Name;
             current.ImageData = transaction.ImageData;
             current.Amount = transaction.Amount;
+            current.Type = transaction.Type;
+            current.VATamount = transaction.VATamount;
+            current.SettingDate = transaction.SettingDate;
 
             return current;
             
